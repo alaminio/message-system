@@ -3,17 +3,22 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content%}
+{% for message in messages %}
+
 <div class="col-md-4">
-        <div class="card mb-4 box-shadow">
-          <div class="card-body">
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <a class="btn btn-sm btn-outline-secondary" href="/read">View Message</a>
-              </div>
-              <small class="text-muted">9 mins</small>
-            </div>
-          </div>
+  <div class="card mb-4 box-shadow">
+    <div class="card-body">
+      <h4>{{message.subject}}</h4>
+      <p class="card-text">{{message.message}}</p>
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="btn-group">
+          <a class="btn btn-sm btn-outline-secondary" href="/read/{{message.id}}">View Message</a>
         </div>
+        <small class="text-muted">9 mins</small>
       </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
 {% endblock %}

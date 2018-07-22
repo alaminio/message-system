@@ -21,7 +21,7 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('', message_view.index),
     path('send/', message_view.send),
-    path('read/', message_view.read, name="read"),
+    path('read/<int:id>', message_view.read, name="read"),
     path('login/', auth_views.login),
     path('logout/', auth_views.logout,{'next_page': '/login'}, name='logout'),
     path('admin/', admin.site.urls),
