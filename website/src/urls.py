@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from message import views as message_view
 
 urlpatterns = [
+    path('', message_view.index),
+    path('send/', message_view.send),
+    path('read/', message_view.read),
     path('admin/', admin.site.urls),
 ]
