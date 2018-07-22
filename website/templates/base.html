@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>{{ title }} | Message System</title>
+    <title>Message System</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -38,7 +38,7 @@
 
       <section class="jumbotron text-center">
         <div class="container">
-          <h1 class="jumbotron-heading">{{ title }}</h1>
+          <h1 class="jumbotron-heading">{% block title %}{% endblock %}</h1>
           <p class="lead text-muted">Use the form bellow to send message.</p>
         </div>
       </section>
