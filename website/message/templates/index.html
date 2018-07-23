@@ -3,6 +3,15 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content%}
+
+<div class="col-md-12">
+    <div class="card mb-4 box-shadow">
+      <div class="card-body">
+        <h4>Direct messages</h4>
+      </div>
+    </div>
+  </div>
+
 {% for message in messages %}
 
 <div class="col-md-4">
@@ -15,6 +24,32 @@
           <a class="btn btn-sm btn-outline-secondary" href="/read/{{message.id}}">View Message</a>
         </div>
         <small class="text-muted">Sent at {{message.created_at}}</small>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+<div class="col-md-12">
+    <div class="card mb-4 box-shadow">
+      <div class="card-body">
+        <h4>CC messages</h4>
+      </div>
+    </div>
+  </div>
+
+{% for cc_message in ccMessages %}
+
+<div class="col-md-4">
+  <div class="card mb-4 box-shadow">
+    <div class="card-body">
+      <h4>{{ cc_message.message.subject }}</h4>
+      <p class="card-text">{{ cc_message.message.message }}</p>
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="btn-group">
+          <a class="btn btn-sm btn-outline-secondary" href="/read/{{ cc_message.message.id }}">View Message</a>
+        </div>
+        <small class="text-muted">Sent at {{ cc_message.message.created_at }}</small>
       </div>
     </div>
   </div>

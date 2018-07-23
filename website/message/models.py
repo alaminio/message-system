@@ -24,3 +24,7 @@ class Reply(models.Model):
 
     class Meta:
         ordering = ['created_at']
+
+class Reader(models.Model):
+    message = models.ForeignKey(Message, on_delete=models.CASCADE)
+    cc = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name="CC")

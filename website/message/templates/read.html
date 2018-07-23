@@ -26,18 +26,20 @@
 </div>
 {% endfor %}
 
-
-  <div class="card mb-4 box-shadow">
-    <div class="card-body">
-      <h4>Reply</h4>
-      <div>
-          <form method="POST" class="post-form">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="save btn btn-default">Reply</button>
-          </form>
-      </div>
+{% if can_replay %}
+<div class="card mb-4 box-shadow">
+  <div class="card-body">
+    <h4>Reply</h4>
+    <div>
+        <form method="POST" class="post-form">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" class="save btn btn-default">Reply</button>
+        </form>
     </div>
   </div>
+</div>
+{% endif %}
+
 </div>
 {% endblock %}
