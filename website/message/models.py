@@ -11,3 +11,12 @@ class Message(models.Model):
 
     def __str__(self):
         return self.subject
+
+class Reply(models.Model):
+    message = models.ForeignKey(Message, on_delete=models.CASCADE)
+    text = models.TextField()
+    author = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name="Author")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text

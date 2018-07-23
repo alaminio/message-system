@@ -1,5 +1,8 @@
-from django.shortcuts import render
-from .models import Message
+from django.shortcuts import render, redirect
+from .models import Message, Reply
+from .forms import MessageForm, ReplyForm
+from pprint import pprint
+
 
 # Create your views here.
 def index(request):
@@ -19,15 +22,39 @@ def index(request):
 
 
 def send(request):
+    if request.method == 'POST':
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            message = form.save(commit=False)
+            message.sender = request.user
+            message.save()
+            return redirect('/read/{}'.format(message.pk))
+    else:
+        form = MessageForm()
     return render(request, 'send.html', {
-        'title': 'Send Message'
+        'title': 'Send Message',
+        'form': form
     })
 
 
 def read(request, id):
     message = Message.objects.get(pk=id)
-    print(message)
+    replies = Reply.objects.filter(message=message)
+
+    if request.method == 'POST':
+        form = ReplyForm(request.POST)
+        if form.is_valid():
+            reply = form.save(commit=False)
+            reply.message = message
+            reply.author = request.user
+            reply.save()
+    else:
+        form = ReplyForm()
+
+
     return render(request, 'read.html', {
         'title': 'Send Message',
-        'message': message
+        'message': message,
+        'form': form,
+        'replies': replies
     })
