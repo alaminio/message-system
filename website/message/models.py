@@ -8,6 +8,7 @@ class Message(models.Model):
     message = models.TextField()
     sender = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name="Sender")
     recipient = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name="Receiver")
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.subject
@@ -20,3 +21,6 @@ class Reply(models.Model):
 
     def __str__(self):
         return self.text
+
+    class Meta:
+        ordering = ['created_at']
