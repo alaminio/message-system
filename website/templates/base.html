@@ -33,8 +33,8 @@
             <a class="nav-link" href="/login">Login</a>
             {% endif %}
           </nav>
-          
-          
+
+
         </div>
       </div>
     </header>
@@ -44,7 +44,7 @@
       <section class="jumbotron text-center">
         <div class="container">
           <h1 class="jumbotron-heading">{% block title %}{% endblock %}</h1>
-          <p class="lead text-muted">Use the form bellow to send message.</p>
+          <p class="lead text-muted">{% block subtitle %}{% endblock %}</p>
         </div>
       </section>
 

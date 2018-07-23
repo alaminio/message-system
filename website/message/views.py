@@ -19,7 +19,7 @@ def index(request):
         logged_in = False
 
     return render(request, 'index.html', {
-        'title': 'Send Message',
+        'title': 'Message System inbox',
         'messages': messages,
         'ccMessages': ccMessages,
         'logged_in': logged_in
@@ -27,6 +27,11 @@ def index(request):
 
 
 def send(request):
+    if request.user.is_authenticated:
+        logged_in = True
+    else:
+        logged_in = False
+
     if request.method == 'POST':
         form = MessageForm(request.POST)
         if form.is_valid():
@@ -56,16 +61,27 @@ def send(request):
         form = MessageForm()
     return render(request, 'send.html', {
         'title': 'Send Message',
-        'form': form
+        'form': form,
+        'logged_in': logged_in
     })
 
 
 def read(request, id):
+    if request.user.is_authenticated:
+        logged_in = True
+    else:
+        logged_in = False
+
+    title = "Read message"
+
     message = Message.objects.get(pk=id)
+    if message and message.subject:
+        title = message.subject
+
     replies = Reply.objects.filter(message=message)
     can_replay = False
 
-    if message.recipient == request.user:
+    if message.recipient == request.user or message.sender == request.user:
         can_replay = True
 
     if request.method == 'POST':
@@ -80,9 +96,10 @@ def read(request, id):
 
 
     return render(request, 'read.html', {
-        'title': 'Send Message',
+        'title': title,
         'message': message,
         'form': form,
         'replies': replies,
-        'can_replay': can_replay
+        'can_replay': can_replay,
+        'logged_in': logged_in
     })

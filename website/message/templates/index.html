@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}{{ title }}{% endblock %}
+{% block subtitle %}Read all of your message here{% endblock %}
 
 {% block content%}
 
@@ -30,6 +31,16 @@
 </div>
 {% endfor %}
 
+{% if not messages %}
+<div class="col-md-4">
+  <div class="card mb-4 box-shadow">
+    <div class="card-body">
+      <p class="card-text">You don't have any message to read</p>
+    </div>
+  </div>
+</div>
+{% endif %}
+
 <div class="col-md-12">
     <div class="card mb-4 box-shadow">
       <div class="card-body">
@@ -55,5 +66,15 @@
   </div>
 </div>
 {% endfor %}
+
+{% if not ccMessages %}
+<div class="col-md-4">
+  <div class="card mb-4 box-shadow">
+    <div class="card-body">
+      <p class="card-text">You don't have any cc message to read</p>
+    </div>
+  </div>
+</div>
+{% endif %}
 
 {% endblock %}
